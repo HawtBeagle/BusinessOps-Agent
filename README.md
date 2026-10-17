@@ -12,7 +12,7 @@ This repository currently contains the model-integration foundations. It is an i
 - Request fields for model selection, temperature, structured-output schemas and tools.
 - Response fields for content, tool calls, token usage, latency and finish reason.
 
-The public snapshot does not yet include a concrete provider implementation, runnable agent workflow, retrieval service or test suite.
+A deterministic FakeLLM provider implements this contract and returns a fixed sample response for offline tests. It does not classify messages or evaluate model quality. A real model provider, runnable agent workflow and retrieval service are not published in this snapshot yet.
 
 ## What I'm learning
 
@@ -30,7 +30,9 @@ These learning areas are being published incrementally. Local experiments may be
 ```text
 app/
   providers/base/llm_interface_provider.py  # Provider boundary
+  providers/fake/fake_llm_provider.py       # Fixed response for offline tests
   schemas/common_llm_request_response.py   # Shared messages, requests, responses and tools
+tests/test_fake_llm_provider.py             # Fake response contract and determinism
 pyproject.toml                            # Python requirements and dependencies
 uv.lock                                   # Dependency lockfile
 ```
@@ -42,6 +44,15 @@ The project declares Python **3.12+** and dependencies on FastAPI, Ollama, pydan
 There is no application entry point or end-to-end setup procedure in this public snapshot yet. PostgreSQL retrieval setup belongs to the local work described above and is not required to read the published contracts.
 
 ## Engineering focus
+
+Run the published provider tests without Ollama or a database:
+
+```bash
+uv sync --frozen
+uv run python -m pytest tests/test_fake_llm_provider.py -q
+```
+
+The sample token counts and latency returned by FakeLLM are constants for tests, not measurements from a model call.
 
 I am applying familiar backend practices to AI systems: explicit contracts, separation of responsibilities, typed data, observable behavior and verification. A successful model call does not by itself prove that an action was executed or an answer is correct.
 
