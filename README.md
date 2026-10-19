@@ -45,6 +45,8 @@ There is no application entry point or end-to-end setup procedure in this public
 
 ## Engineering focus
 
+The request-analysis schema, prompt and business-information checks are published as a standalone boundary, not a runnable endpoint. See [why valid JSON is not proof of customer intent](docs/schema-vs-intent.md) for the damaged-order example and reproducible tests.
+
 Run the published provider tests without Ollama or a database:
 
 ```bash
