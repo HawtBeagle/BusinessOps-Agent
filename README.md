@@ -45,6 +45,8 @@ There is no application entry point or end-to-end setup procedure in this public
 
 ## Engineering focus
 
+The M02 evaluation harness compares selected response fields and keeps semantic review separate. See [what an AI evaluation PASS establishes](docs/evaluating-ai-responses.md) for offline test commands and the prerequisites for its optional live API run.
+
 The request-analysis schema, prompt and business-information checks are published as a standalone boundary, not a runnable endpoint. See [why valid JSON is not proof of customer intent](docs/schema-vs-intent.md) for the damaged-order example and reproducible tests.
 
 Run the published provider tests without Ollama or a database:
