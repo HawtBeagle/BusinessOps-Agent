@@ -45,6 +45,8 @@ There is no application entry point or end-to-end setup procedure in this public
 
 ## Engineering focus
 
+The standalone tool executor validates arguments and bounds waiting for synchronous handlers. See [tool timeouts](docs/tool-timeouts.md) for the controlled worker test and why a timeout does not establish the operation's outcome. The full API and model-facing timeout message are not published yet.
+
 The provider-neutral tool-definition converter exposes registry names, descriptions and argument schemas without sending or executing Python handlers. See [tool definitions](docs/tool-definitions.md) for the boundary and offline tests; the executor is not included yet.
 
 The M02 evaluation harness compares selected response fields and keeps semantic review separate. See [what an AI evaluation PASS establishes](docs/evaluating-ai-responses.md) for offline test commands and the prerequisites for its optional live API run.
